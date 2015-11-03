@@ -17,6 +17,7 @@ import com.airbnb.android.airmapview.listeners.OnMapBoundsCallback;
 import com.airbnb.android.airmapview.listeners.OnMapClickListener;
 import com.airbnb.android.airmapview.listeners.OnMapInitializedListener;
 import com.airbnb.android.airmapview.listeners.OnMapLoadedListener;
+import com.airbnb.android.airmapview.listeners.OnMapLongClickListener;
 import com.airbnb.android.airmapview.listeners.OnMapMarkerClickListener;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -25,7 +26,7 @@ import com.google.android.gms.maps.model.Marker;
 
 public class AirMapView extends FrameLayout
     implements OnCameraChangeListener, OnMapClickListener,
-               OnMapMarkerClickListener, OnMapLoadedListener, OnInfoWindowClickListener {
+               OnMapMarkerClickListener, OnMapLoadedListener, OnInfoWindowClickListener, OnMapLongClickListener {
 
   private static final int INVALID_ZOOM = -1;
 
@@ -35,6 +36,7 @@ public class AirMapView extends FrameLayout
   private boolean mOnCameraMoveTriggered;
   private OnMapInitializedListener onMapInitializedListener;
   private OnMapClickListener onMapClickListener;
+  private OnMapLongClickListener onMapLongClickListener;
   private OnMapMarkerClickListener onMapMarkerClickListener;
   private OnInfoWindowClickListener onInfoWindowClickListener;
 
@@ -243,6 +245,10 @@ public class AirMapView extends FrameLayout
     onMapClickListener = listener;
   }
 
+  public void setOnMapLongClickListener(OnMapLongClickListener listener){
+    onMapLongClickListener = listener;
+  }
+
   public void setInfoWindowAdapter(GoogleMap.InfoWindowAdapter adapter, InfoWindowCreator creator) {
     if (isInitialized()) {
       mapInterface.setInfoWindowCreator(adapter, creator);
@@ -305,6 +311,13 @@ public class AirMapView extends FrameLayout
   public void onMapClick(LatLng latLng) {
     if (onMapClickListener != null) {
       onMapClickListener.onMapClick(latLng);
+    }
+  }
+
+  @Override
+  public void onMapLongClick(LatLng latLng) {
+    if (onMapLongClickListener != null) {
+      onMapLongClickListener.onMapLongClick(latLng);
     }
   }
 

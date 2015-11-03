@@ -1,6 +1,7 @@
 package com.airbnb.android.airmapview;
 
 import com.airbnb.android.airmapview.listeners.OnLatLngScreenLocationCallback;
+import com.airbnb.android.airmapview.listeners.OnMapLongClickListener;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -159,6 +160,13 @@ public interface AirMapInterface {
    * @param listener {@link com.airbnb.android.airmapview.listeners.OnMapClickListener} callback
    */
   void setOnMapClickListener(OnMapClickListener listener);
+
+  /**
+   * Register a callback to be invoked when the map is clicked
+   *
+   * @param listener {@link com.airbnb.android.airmapview.listeners.OnMapClickListener} callback
+   */
+  void setOnMapLongClickListener(OnMapLongClickListener listener);
 
   /**
    * Set the map's padding. Currently only works with Google Play Services maps.
